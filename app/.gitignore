@@ -39,6 +39,7 @@ captures/
 ### Android Patch ###
 gen-external-apklibs
 
+.idea/
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android \
