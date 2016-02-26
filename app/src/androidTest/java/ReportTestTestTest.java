@@ -5,4 +5,19 @@ import junit.framework.TestCase;
  */
 public class ReportTestTestTest extends TestCase {
 
+    public float completeRatio (float total, float expected) {
+
+        float summary = (total / expected) * 100;
+
+
+        return summary;
+    }
+
+
+    void display() {
+
+
+    }
+
+
 }
