@@ -19,5 +19,10 @@ public class TaskTestTest extends TestCase {
         int result = Task.add();
     }
 
+    @Override
+    protected void tearDown () throws Exception{
+        super.tearDown();
+    }
+
 
 }
