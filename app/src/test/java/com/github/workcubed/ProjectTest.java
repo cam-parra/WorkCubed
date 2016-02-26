@@ -1,12 +1,20 @@
-package com.github.workcubed;
+package com.github.workcubed.test;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
 public class ProjectTest {
+
+    public int currentYear = 2016;
+
         @Test
-        public void dateIsCorrect() throws Exception {
-                assertEquals(4, 2 + 2);
+        public void add_project_test() throws Exception {
+
+             // check dates
+
+            int input;
+
+            assert(input >= currentYear);
+
         }
 }
