@@ -15,8 +15,8 @@ public class Task {
     float time_spent_in_hours;
     float reminder_time;
 
-    public void add () {
-
+    public static int add () {
+        return 0;
     }
 
     public void edit () {
