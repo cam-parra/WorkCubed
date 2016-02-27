@@ -5,9 +5,14 @@ package com.github.workcubed;
  */
 
 
+
 public class Project {
 
-    public void add_project () {
+    int year;
+
+    public int add_project () {
+
+        return 0;
 
     }
 

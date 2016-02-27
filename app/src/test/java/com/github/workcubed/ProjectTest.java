@@ -1,4 +1,7 @@
-package com.github.workcubed.test;
+package com.github.workcubed.Project.test;
+
+import android.test.suitebuilder.annotation.SmallTest;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -7,14 +10,25 @@ public class ProjectTest {
 
     public int currentYear = 2016;
 
-        @Test
-        public void add_project_test() throws Exception {
+    @Override
+    protected void setUp () throws Exception {
+        super.setUp();
+    }
 
-             // check dates
+    @SmallTest
+    public void add_project_test() throws Exception {
 
-            int input;
+        // check dates
 
-            assert(input >= currentYear);
+        int input;
 
-        }
+        assert(input >= currentYear);
+
+    }
+
+    @Override
+    protected void tearDown () throws Exception{
+        super.tearDown();
+    }
+
 }
