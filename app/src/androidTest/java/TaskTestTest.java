@@ -19,8 +19,16 @@ public class TaskTestTest extends TestCase {
         int result = Task.add();
     }
 
+    @SmallTest
+    public void testMYSQLConnection () {
+
+        boolean result = Task.MYSQLConnect();
+
+        assertTrue(result);
+    }
+
     @Override
-    protected void tearDown () throws Exception{
+    protected void tearDown () throws Exception {
         super.tearDown();
     }
 

@@ -27,5 +27,8 @@ public class Task {
 
     }
 
+    public static boolean MYSQLConnect () {
+        return false;
+    }
 
 }
