@@ -14,26 +14,28 @@ import java.sql.SQLException;
 
 public class Project {
 
-    public void add_project (String name, String description, Date date_created, Date deadline_date, boolean status) {
+    String myDriver = "org.gjt.mm.mysql.Driver";
+    String url = "http://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
+    String username = "crew";
+    String password = "pizza123";
 
-        String url = "workcubeddb.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com:1150";
-        String username = "cam";
-        String password = "octocat246";
+    public void add_project (String name, String description, Date deadline_date, int status) {
+
+
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             System.out.println("Database connected!");
 
             // the mysql insert statement
-            String query = " insert into project (name, description, date_created, deadline_date, status)"
+            String query = " insert into Project (Description, DateDeadline, Completed, Name)"
                     + " values (?, ?, ?, ?)";
 
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString(1, name);
-            preparedStmt.setString (2, description);
-            preparedStmt.setDate(3, date_created);
-            preparedStmt.setDate(4, deadline_date);
-            preparedStmt.setBoolean(5, status);
+            preparedStmt.setString(1, description);
+            preparedStmt.setDate(2, deadline_date);
+            preparedStmt.setInt(3, status);
+            preparedStmt.setString(4, name);
 
             // execute the preparedstatement
             preparedStmt.execute();
@@ -46,26 +48,21 @@ public class Project {
 
     }
 
-    public void edit_project (String name, String description, Date date_created, Date deadline_date, boolean status) {
+    public void edit_project (String name, String description, Date date_created, Date deadline_date, int status) {
         try
         {
             // create a java mysql database connection
-            String myDriver = "org.gjt.mm.mysql.Driver";
-            String myUrl = "workcubeddb.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com:1150";
-            String username = "cam";
-            String password = "octocat246";
             Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, username, password);
+            Connection conn = DriverManager.getConnection(url, username, password);
 
             // create the java mysql update preparedstatement
-            String query = "update users set name = ?, description = ?, date_created = ?, deadline_date = ?, status = ? where id = ?";
+            String query = "update Project set Name = ?, Description = ?, DateDeadline = ?, Completed = ? where ID = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setString(1, name);
-            preparedStmt.setString(2, description);
-            preparedStmt.setDate(3, date_created);
-            preparedStmt.setDate(4, deadline_date);
-            preparedStmt.setBoolean(5, status);
-//            preparedStmt.setInt(6, id);
+            preparedStmt.setString (1, description);
+            preparedStmt.setDate(2, deadline_date);
+            preparedStmt.setInt(3, status);
+            preparedStmt.setString(4, name);
+//            preparedStmt.setInt(5, id);
 
             // execute the java preparedstatement
             preparedStmt.executeUpdate();
@@ -80,7 +77,28 @@ public class Project {
 
     }
 
-    public void delete_project () {
+    public void delete_project (int id) {
+        try
+        {
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(url, username, password);
 
+            // create the mysql delete statement.
+            // i'm deleting the row where the id is "3", which corresponds to my
+            // "Barney Rubble" record.
+            String query = "delete from Project where ID = ?";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+            conn.close();
+        }
+        catch (Exception e)
+        {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
     }
 }
