@@ -7,21 +7,51 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.github.workcubed.ProjectForm">
+    tools:context="com.github.workcubed.ProjectForm"><![CDATA[
+
+    />
+]]>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
         android:id="@+id/button2"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp" />
-    <Button
+        android:onClick="setDate"
+        android:text="@string/date_button_set"
+        />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pick_date"
-        android:onClick="showDatePickerDialog"
-        />
+        android:text="@string/date_label_set"
+        android:id="@+id/textView"
+        android:layout_below="@id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="66dp"
+        android:layout_toLeftOf="@+id/button2"
+        android:text="@string/date_view_set"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="72dp"
+        android:text="@string/date_selected"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </RelativeLayout>
