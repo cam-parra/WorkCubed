@@ -28,7 +28,7 @@ public class Project {
     Date _deadline_date;
 
 
-    public  void Project (int ID, String description, Timestamp date_created, Date date_deadline, int completed, String name) {
+    public Project (int ID, String description, Timestamp date_created, Date date_deadline, int completed, String name) {
         _id = ID;
         _description = description;
         _date_created = date_created;
