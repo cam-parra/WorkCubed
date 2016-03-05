@@ -1,7 +1,5 @@
 package com.github.workcubed;
 
-
-import android.app.ListActivity;    // would be needed if MainActivity extended ListActivity.
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -73,17 +71,18 @@ public class MainActivity extends AppCompatActivity {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             System.out.println("Database connected!");
 
-        Statement stm;
-        stm = connection.createStatement();
-        String sql = "Select * From Customer";
-        ResultSet rst;
-        rst = stm.executeQuery(sql);
-        ArrayList<Project> customerList = new ArrayList<>();
-        while (rst.next()) {
-            Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
-                    rst.getDate("DateDeadLine"), rst.getInt("Completed"),rst.getString("Name")) ;
+            Statement stm;
+            stm = connection.createStatement();
+            String sql = "Select * From Customer";
+            ResultSet rst;
+            rst = stm.executeQuery(sql);
+            ArrayList<Project> customerList = new ArrayList<>();
+            while (rst.next()) {
+                Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
+                        rst.getDate("DateDeadLine"), rst.getInt("Completed"), rst.getString("Name"));
+            }
+            return customerList;
         }
-        return customerList;
-    }
 
+    }
 }
