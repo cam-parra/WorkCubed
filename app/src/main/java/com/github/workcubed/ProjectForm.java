@@ -20,7 +20,9 @@ public class ProjectForm extends AppCompatActivity {
     private DatePicker datePicker;
     private Calendar calendar;
     private TextView dateView;
+    private TextView dateView2;
     private  int year, month, day;
+    private  int year2, month2, day2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,10 @@ public class ProjectForm extends AppCompatActivity {
         setContentView(R.layout.activity_project_form);
 
         dateView = (TextView) findViewById(R.id.textView);
+        dateView2 = (TextView) findViewById(R.id.textView2);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
+        year2 = calendar.get(Calendar.YEAR);
 
 
     }
@@ -40,6 +44,13 @@ public class ProjectForm extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
                 .show();
     }
+    @SuppressWarnings("deprecation")
+    public void setDate2(View view) {
+        showDialog(998);
+        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
+                .show();
+    }
+
 
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -47,8 +58,14 @@ public class ProjectForm extends AppCompatActivity {
         if (id == 999) {
             return new DatePickerDialog(this, myDateListener, year, month, day);
         }
+        if (id == 998) {
+            return new DatePickerDialog(this, myDateListener, year2, month2, day2);
+        }
+
         return null;
     }
+
+
 
     private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -64,8 +81,14 @@ public class ProjectForm extends AppCompatActivity {
     private void showDate(int year, int month, int day) {
         dateView.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
+
+    }
+
+    private void showEndDate(int year, int month, int day) {
+        dateView2.setText(new StringBuilder().append(day2).append("/")
+                .append(month2).append("/").append(year2));
+
     }
 
 
 }
-

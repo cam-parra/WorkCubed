@@ -2,8 +2,9 @@
     <string name="app_name">WorkCubed</string>
     <string name="action_settings">Settings</string>
     <string name="pick_date">PickDate</string>
-    <string name="date_label_set">Insert Date</string>
+    <string name="date_label_set"></string>
     <string name="date_button_set">END</string>
     <string name="date_view_set">START</string>
     <string name="date_selected"></string>
+    <string name="complete_bool">Complete</string>
 </resources>
