@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 /**
  * Created by Dave on 2/24/16.
@@ -18,6 +19,23 @@ public class Project {
     String url = "http://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
     String username = "crew";
     String password = "pizza123";
+
+    int _id;
+    String _name;
+    String _description;
+    int _completed;
+    Timestamp _date_created;
+    Date _deadline_date;
+
+
+    public  void Project (int ID, String description, Timestamp date_created, Date date_deadline, int completed, String name) {
+        _id = ID;
+        _description = description;
+        _date_created = date_created;
+        _deadline_date = date_deadline;
+        _completed = completed;
+        _name = name;
+    }
 
     public void add_project (String name, String description, Date deadline_date, int status) {
 
