@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+
+            ListView lv = (ListView) findViewById(R.id.listView);
+
+            List<Project> your_array_list = new ArrayList<Project>(getAllProjects());
+
+            ArrayAdapter<Project> arrayAdapter = new ArrayAdapter<Project>(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    your_array_list);
+
+            lv.setAdapter(arrayAdapter);
+        }
+
+        catch (SQLException se) {
+
+        }
+
+        catch (ClassNotFoundException CNF) {
+
+        }
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
@@ -61,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static ArrayList<Project> getAllCustomer() throws ClassNotFoundException, SQLException {
+    public static ArrayList<Project> getAllProjects() throws ClassNotFoundException, SQLException {
 
         String myDriver = "org.gjt.mm.mysql.Driver";
         String url = "http://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
@@ -76,12 +98,12 @@ public class MainActivity extends AppCompatActivity {
             String sql = "Select * From Customer";
             ResultSet rst;
             rst = stm.executeQuery(sql);
-            ArrayList<Project> customerList = new ArrayList<>();
+            ArrayList<Project> projectList = new ArrayList<>();
             while (rst.next()) {
                 Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
                         rst.getDate("DateDeadLine"), rst.getInt("Completed"), rst.getString("Name"));
             }
-            return customerList;
+            return projectList;
         }
 
     }
