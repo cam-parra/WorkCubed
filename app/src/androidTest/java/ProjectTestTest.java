@@ -7,7 +7,6 @@ import junit.framework.TestCase;
  */
 public class ProjectTestTest extends TestCase {
 
-    public int currentYear = 2016;
 
     @Override
     protected void setUp () throws Exception {
@@ -17,11 +16,7 @@ public class ProjectTestTest extends TestCase {
     @SmallTest
     public void add_project_test() throws Exception {
 
-        // check dates
 
-        int input = 3000;
-
-        assert(input >= currentYear);
 
     }
 
