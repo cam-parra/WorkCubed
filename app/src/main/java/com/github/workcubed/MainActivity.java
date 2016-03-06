@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         catch (SQLException se) {
-
+            System.out.println("Can't connect!" + se);
         }
 
         catch (ClassNotFoundException CNF) {
-
+            System.out.println(CNF);
         }
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         String url = "http://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
         String username = "crew";
         String password = "pizza123";
-
+        Class.forName(myDriver);
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             System.out.println("Database connected!");
 
