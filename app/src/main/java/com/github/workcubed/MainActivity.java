@@ -114,4 +114,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void projectDisplay(View view) {
+        Intent intent = new Intent(this,ProjectView.class);
+        startActivity(intent);
+
+    }
+
 }
