@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Project> getAllProjects() throws ClassNotFoundException, SQLException {
 
         String myDriver = "org.gjt.mm.mysql.Driver";
-        String url = "http://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
+        String url = "http://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com:3306";
         String username = "crew";
         String password = "pizza123";
         Class.forName(myDriver);
