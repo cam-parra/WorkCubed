@@ -41,6 +41,7 @@ public class Project {
 
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            Class.forName(myDriver);
             System.out.println("Database connected!");
 
             // the mysql insert statement
@@ -59,8 +60,12 @@ public class Project {
 
             connection.close();
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);
+        }
+        catch (ClassNotFoundException e) {
+
         }
 
     }

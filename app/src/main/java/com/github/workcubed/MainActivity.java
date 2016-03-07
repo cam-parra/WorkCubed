@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         catch (SQLException se) {
-            System.out.println("Can't connect!" + se);
+            System.out.println("Can't connect! " + se);
         }
 
         catch (ClassNotFoundException CNF) {
