@@ -1,5 +1,6 @@
 package com.github.workcubed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Can't connect! " + se);
         }
 
-        catch (ClassNotFoundException CNF) {
-            System.out.println(CNF);
+        catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
         }
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -107,4 +108,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public void addProject(View view) {
+        Intent intent = new Intent(this, ProjectForm.class);
+        startActivity(intent);
+    }
+
 }
