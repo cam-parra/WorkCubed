@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,10 +46,18 @@ public class MainActivity extends AppCompatActivity {
 
         catch (SQLException se) {
             System.out.println("Can't connect! " + se);
+//            Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, se);
+
         }
 
         catch (ClassNotFoundException cnfe) {
             System.out.println(cnfe);
+        }
+        catch (IllegalAccessException e) {
+            System.out.println(e);
+        }
+        catch (InstantiationException e) {
+            System.out.println(e);
         }
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -84,13 +95,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static ArrayList<Project> getAllProjects() throws ClassNotFoundException, SQLException {
+    public static ArrayList<Project> getAllProjects() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
-        String myDriver = "org.gjt.mm.mysql.Driver";
-        String url = "http://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com:3306";
+//        Log.i("MainActivity", "Yo Yo Yo");
+        String myDriver = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
         String username = "crew";
         String password = "pizza123";
-        Class.forName(myDriver);
+        Class.forName(myDriver).newInstance();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             System.out.println("Database connected!");
 
