@@ -16,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
-
         android:text="@string/date_view_set"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="25dp"
@@ -80,7 +79,18 @@
         android:layout_alignParentBottom="@id/editText"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
+
        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_button"
+        android:id="@+id/button4"
+        android:layout_marginTop="74dp"
+        android:layout_below="@+id/checkBox"
+        android:onClick="addProject"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

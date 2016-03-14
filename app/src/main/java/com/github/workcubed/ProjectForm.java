@@ -3,6 +3,7 @@ package com.github.workcubed;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import org.w3c.dom.Text;
 
 import java.util.Calendar;
+import java.util.logging.Logger;
 
 public class ProjectForm extends AppCompatActivity {
     private TextView startDateDisplay;
@@ -44,6 +46,7 @@ public class ProjectForm extends AppCompatActivity {
         /* add a click listener to the button   */
         startPickDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //Logger.getLogger("ProjectForm", "MainActivity.onOptionItemSelected() - get ID number" + startDateDisplay);
                 showDateDialog(startDateDisplay, startDate);
             }
         });
@@ -116,6 +119,11 @@ public class ProjectForm extends AppCompatActivity {
                 ((DatePickerDialog) dialog).updateDate(activeDate.get(Calendar.YEAR), activeDate.get(Calendar.MONTH), activeDate.get(Calendar.DAY_OF_MONTH));
                 break;
         }
+    }
+
+    public void addProject(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
