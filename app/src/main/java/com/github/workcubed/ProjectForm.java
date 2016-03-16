@@ -32,6 +32,10 @@ public class ProjectForm extends AppCompatActivity {
     private TextView activeDateDisplay;
     private Calendar activeDate;
 
+    /**
+     *
+     * @param savedInstanceState Saved data form past instances
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_form);
@@ -70,6 +74,11 @@ public class ProjectForm extends AppCompatActivity {
         updateDisplay(endDateDisplay, endDate);
     }
 
+    /**
+     *
+     * @param dateDisplay The date ID
+     * @param date        The date that will be displayed
+     */
     private void updateDisplay(TextView dateDisplay, Calendar date) {
         dateDisplay.setText(
                 new StringBuilder()
@@ -80,6 +89,11 @@ public class ProjectForm extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param dateDisplay The date ID
+     * @param date        The date that will be displayed
+     */
     public void showDateDialog(TextView dateDisplay, Calendar date) {
         activeDateDisplay = dateDisplay;
         activeDate = date;
@@ -102,6 +116,11 @@ public class ProjectForm extends AppCompatActivity {
         activeDate = null;
     }
 
+    /**
+     *
+     * @param id The projects ID number
+     * @return   null
+     */
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -111,6 +130,11 @@ public class ProjectForm extends AppCompatActivity {
         return null;
     }
 
+    /**
+     *
+     * @param id      The projects ID number
+     * @param dialog
+     */
     @Override
     protected void onPrepareDialog(int id, Dialog dialog) {
         super.onPrepareDialog(id, dialog);
@@ -121,6 +145,10 @@ public class ProjectForm extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param view ID for the add project button
+     */
     public void addProject(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

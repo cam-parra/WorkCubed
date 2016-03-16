@@ -26,7 +26,15 @@ public class Project {
     Timestamp _date_created;
     Date _deadline_date;
 
-
+    /**
+     *
+     * @param ID            The projects Identification number
+     * @param description   Details on the project
+     * @param date_created  The date the project was created
+     * @param date_deadline The scheduled date the project should be completed by
+     * @param completed     Keeps track of weather the project is complete or not
+     * @param name          Name of the project
+     */
     public Project (int ID, String description, Timestamp date_created, Date date_deadline, int completed, String name) {
         _id = ID;
         _description = description;
@@ -77,6 +85,14 @@ public class Project {
 
     }
 
+    /**
+     *
+     * @param name          The new name for the project
+     * @param description   The updated description and details
+     * @param date_created  The Date the project was edited
+     * @param deadline_date The up-to-date deadline for the project
+     * @param status        The new completions status
+     */
     public void edit_project (String name, String description, Date date_created, Date deadline_date, int status) {
         try
         {
@@ -106,6 +122,10 @@ public class Project {
 
     }
 
+    /**
+     *
+     * @param id The Identification number of the soon to be deleted project
+     */
     public void delete_project (int id) {
         try
         {

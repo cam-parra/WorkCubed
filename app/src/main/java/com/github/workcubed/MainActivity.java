@@ -25,6 +25,10 @@ import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     *
+     * @param savedInstanceState Saved date form previous instances
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
+    /**
+     *
+     * @param menu Information to put into the menu
+     * @return     Returns true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -80,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     *
+     * @param item  Information to put into the action bar
+     * @return      If id is valid, returns true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -95,6 +109,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     *
+     * @return                         returns projectList -> the completed list of info for project
+     * @throws ClassNotFoundException  Class missing or corrupt
+     * @throws SQLException            SQL connection failed
+     * @throws InstantiationException  Problem with instantiation
+     * @throws IllegalAccessException  Illegal attempt to access
+     */
     public static ArrayList<Project> getAllProjects() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
 //        Log.i("MainActivity", "Yo Yo Yo");
@@ -121,11 +143,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param view The button ID
+     */
     public void addProject(View view) {
         Intent intent = new Intent(this, ProjectForm.class);
         startActivity(intent);
     }
 
+    /**
+     *
+     * @param view The button ID
+     */
     public void projectDisplay(View view) {
         Intent intent = new Intent(this,ProjectView.class);
         startActivity(intent);
