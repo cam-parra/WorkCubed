@@ -37,6 +37,13 @@ public class Project {
         _name = name;
     }
 
+    /**
+     *
+     * @param name            Holds the name that will be add to the project
+     * @param description     A short description of what need to be accomplished in the project
+     * @param deadline_date   The projects deadline
+     * @param status          holds the status, which is complete or not complete
+     */
     public void add_project (String name, String description, Date deadline_date, int status) {
 
 
