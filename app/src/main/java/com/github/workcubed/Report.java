@@ -1,9 +1,30 @@
 package com.github.workcubed;
 
-/**
- * Created by cam on 2/25/16.
- */
-public class Report {
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
+public class Report extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_report);
+    }
+
+    public void daily () {
+
+    }
+
+    public void weekly () {
+
+    }
+
+    public void monthly () {
+
+    }
+
+    public void quarterly () {
+
+    }
 
 }
