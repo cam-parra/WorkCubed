@@ -5,6 +5,10 @@ import android.os.Bundle;
 
 public class ProjectView extends AppCompatActivity {
 
+    /**
+     *
+     * @param savedInstanceState Saved info from previous states
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

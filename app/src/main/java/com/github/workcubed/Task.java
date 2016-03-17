@@ -16,6 +16,16 @@ public class Task {
     String username = "crew";
     String password = "pizza123";
 
+    /**
+     *
+     * @param name             Name of the project
+     * @param description      Basic information on the project
+     * @param hours_actual     The actual time it took to complete project
+     * @param hours_estimated  The estimated time taken to complete project
+     * @param project_id       The projects ID number
+     * @param deadline_date    The date the project needs to be done by
+     * @param status           The current complete status of the project
+     */
     public void add (String name, String description, Time hours_actual, Time hours_estimated, int project_id, Date deadline_date, int status) {
 
 
@@ -48,6 +58,16 @@ public class Task {
         }
     }
 
+    /**
+     *
+     * @param name             Name of the project
+     * @param description      Basic information on the project
+     * @param hours_actual     The actual time it took to complete project
+     * @param hours_estimated  The estimated time taken to complete project
+     * @param project_id       The projects ID number
+     * @param deadline_date    The date the project needs to be done by
+     * @param status           The current complete status of the project
+     */
     public void edit (String name, String description, Time hours_actual, Time hours_estimated, int project_id, Date deadline_date, boolean status) {
         try
         {
@@ -81,6 +101,10 @@ public class Task {
         }
     }
 
+    /**
+     *
+     * @param id ID number of soon to be deleted project
+     */
     public void delete (int id) {
         try
         {
