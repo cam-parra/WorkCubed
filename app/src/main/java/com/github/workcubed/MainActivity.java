@@ -18,7 +18,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
+//        try {
 
             ListView lv = (ListView) findViewById(R.id.listView);
 
@@ -46,23 +49,23 @@ public class MainActivity extends AppCompatActivity {
                     your_array_list);
 
             lv.setAdapter(arrayAdapter);
-        }
+//        }
 
-        catch (SQLException se) {
-            System.out.println("Can't connect! " + se);
-//            Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, se);
-
-        }
-
-        catch (ClassNotFoundException cnfe) {
-            System.out.println(cnfe);
-        }
-        catch (IllegalAccessException e) {
-            System.out.println(e);
-        }
-        catch (InstantiationException e) {
-            System.out.println(e);
-        }
+//        catch (SQLException se) {
+//            System.out.println("Can't connect! " + se);
+////            Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, se);
+//
+//        }
+//
+//        catch (ClassNotFoundException cnfe) {
+//            System.out.println(cnfe);
+//        }
+//        catch (IllegalAccessException e) {
+//            System.out.println(e);
+//        }
+//        catch (InstantiationException e) {
+//            System.out.println(e);
+//        }
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
@@ -117,29 +120,46 @@ public class MainActivity extends AppCompatActivity {
      * @throws InstantiationException  Problem with instantiation
      * @throws IllegalAccessException  Illegal attempt to access
      */
-    public static ArrayList<Project> getAllProjects() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public static ArrayList<Project> getAllProjects() {
 
 //        Log.i("MainActivity", "Yo Yo Yo");
-        String myDriver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
-        String username = "crew";
-        String password = "pizza123";
-        Class.forName(myDriver).newInstance();
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            System.out.println("Database connected!");
+//        String myDriver = "com.mysql.jdbc.Driver";
+//        String url = "jdbc:mysql://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
+//        String username = "crew";
+//        String password = "pizza123";
+//        Class.forName(myDriver).newInstance();
 
-            Statement stm;
-            stm = connection.createStatement();
-            String sql = "Select * From Customer";
-            ResultSet rst;
-            rst = stm.executeQuery(sql);
-            ArrayList<Project> projectList = new ArrayList<>();
-            while (rst.next()) {
-                Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
-                        rst.getDate("DateDeadLine"), rst.getInt("Completed"), rst.getString("Name"));
-            }
-            return projectList;
+
+
+//            Statement stm;
+//            stm = connection.createStatement();
+//            String sql = "Select * From Customer";
+//            ResultSet rst;
+//            rst = stm.executeQuery(sql);
+
+        ArrayList<Project> projectList = new ArrayList<>();
+//            while (rst.next()) {
+
+        int id =     0;
+        Date date = new Date();
+        long creation = date.getTime();
+        Timestamp creation_date = new Timestamp(creation);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2017);
+        calendar.set(Calendar.MONTH, 5);
+        calendar.set(Calendar.DAY_OF_MONTH, 17);
+        creation = date.getTime();
+        Timestamp deadline = new Timestamp(creation);
+//            Date deadline =;
+        while (id < 6) {
+            String name = "Project" + id;
+//                Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
+//                        rst.getDate("DateDeadLine"), rst.getInt("Completed"), rst.getString("Name"));
+            Project project = new Project(id, "this is a project", creation_date, deadline, 0, name);
+            projectList.add(project);
+            id++;
         }
+        return projectList;
 
     }
 

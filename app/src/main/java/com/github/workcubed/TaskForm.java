@@ -12,10 +12,7 @@ import android.widget.DatePicker;
 import android.app.Dialog;
 
 
-/*
-*
-*
-*/
+
 public class TaskForm extends AppCompatActivity {
 
 //    private TextView startDateDisplay;
@@ -54,6 +51,11 @@ public class TaskForm extends AppCompatActivity {
         updateDisplay(endDateDisplay, endDate);
     }
 
+    /**
+     *
+     * @param dateDisplay
+     * @param date
+     */
     public void showDateDialog(TextView dateDisplay, Calendar date) {
         activeDateDisplay = dateDisplay;
         activeDate = date;

@@ -3,7 +3,7 @@ package com.github.workcubed;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Report extends AppCompatActivity {
+public class Report extends AppCompatActivity implements CalendarInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

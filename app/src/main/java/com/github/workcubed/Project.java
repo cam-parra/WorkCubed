@@ -24,7 +24,7 @@ public class Project {
     String _description;
     int _completed;
     Timestamp _date_created;
-    Date _deadline_date;
+    Timestamp _deadline_date;
 
     /**
      *
@@ -35,7 +35,7 @@ public class Project {
      * @param completed     Keeps track of weather the project is complete or not
      * @param name          Name of the project
      */
-    public Project (int ID, String description, Timestamp date_created, Date date_deadline, int completed, String name) {
+    public Project (int ID, String description, Timestamp date_created, Timestamp date_deadline, int completed, String name) {
         _id = ID;
         _description = description;
         _date_created = date_created;
