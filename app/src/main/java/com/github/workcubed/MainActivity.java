@@ -121,7 +121,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        Log.i("MainActivity", "Yo Yo Yo");
         String myDriver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
+        String url = "jdbc:mysql://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com:3306";
+        //workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com
         String username = "crew";
         String password = "pizza123";
         Class.forName(myDriver).newInstance();

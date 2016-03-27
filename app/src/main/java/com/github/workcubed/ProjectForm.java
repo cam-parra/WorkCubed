@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.support.v4.app.FragmentManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
@@ -31,6 +33,7 @@ public class ProjectForm extends AppCompatActivity {
 
     private TextView activeDateDisplay;
     private Calendar activeDate;
+    Dbhelper newdb;
 
     /**
      *
@@ -39,6 +42,8 @@ public class ProjectForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_form);
+
+        newdb = new Dbhelper(this);
 
         /*  capture our View elements for the start date function   */
         startDateDisplay = (TextView) findViewById(R.id.textView);
