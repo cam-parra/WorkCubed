@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -28,6 +29,8 @@ public class ProjectForm extends AppCompatActivity {
     private Button endPickDate;
     private Calendar startDate;
     private Calendar endDate;
+    private EditText projectname;
+    private EditText projectDescription;
 
     static final int DATE_DIALOG_ID = 0;
 
@@ -44,6 +47,12 @@ public class ProjectForm extends AppCompatActivity {
         setContentView(R.layout.activity_project_form);
 
         newdb = new Dbhelper(this);
+
+        projectname = (EditText) findViewById(R.id.editText);
+        projectname.getText();
+
+        projectDescription = (EditText) findViewById(R.id.proj_des_edit);
+        projectDescription.getText();
 
         /*  capture our View elements for the start date function   */
         startDateDisplay = (TextView) findViewById(R.id.textView);
@@ -67,13 +76,14 @@ public class ProjectForm extends AppCompatActivity {
         /* get the current date */
         endDate = Calendar.getInstance();
 
+
         /* add a click listener to the button   */
         endPickDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDateDialog(endDateDisplay, endDate);
             }
         });
-
+        newdb.insertProject(DATE_DIALOG_ID, projectname.toString(), projectDescription.toString(), startDate.toString(), endDate.toString(), 1);
         /* display the current date (this method is below)  */
         updateDisplay(startDateDisplay, startDate);
         updateDisplay(endDateDisplay, endDate);
