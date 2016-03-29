@@ -74,10 +74,6 @@ public class Dbhelper extends SQLiteOpenHelper {
         contentValues.put("description", description);
         contentValues.put("names", name);
 
-
-
-
-
         db.update("Projects", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }

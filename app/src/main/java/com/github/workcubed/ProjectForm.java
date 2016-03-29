@@ -90,12 +90,12 @@ public class ProjectForm extends AppCompatActivity {
 
         final CheckBox completedtask  = (CheckBox) findViewById(R.id.checkBox);
 
-        completedtask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                complete = 1;
-                Logger.getLogger("HEY THIS WORKED");
-            }
-        });
+//        completedtask.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                complete = 1;
+//                Logger.getLogger("HEY THIS WORKED");
+//            }
+//        });
 
         submit = (Button) findViewById(R.id.submit_project);
 
