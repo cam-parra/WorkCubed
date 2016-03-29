@@ -164,7 +164,7 @@ public class ProjectForm extends AppCompatActivity {
             activeDate.set(Calendar.MONTH, monthOfYear);
             activeDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateDisplay(activeDateDisplay, activeDate);
-            unregisterDateDisplay();
+            //unregisterDateDisplay();
         }
     };
 

@@ -32,7 +32,8 @@ public class Dbhelper extends SQLiteOpenHelper {
     private HashMap hp;
 
     public Dbhelper(Context context){
-        super(context, DATABASE_NAME, null, 1);
+        //super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
