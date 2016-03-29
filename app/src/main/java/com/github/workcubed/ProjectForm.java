@@ -32,7 +32,7 @@ public class ProjectForm extends AppCompatActivity {
     private EditText projectname;
     private EditText projectDescription;
 
-    static final int DATE_DIALOG_ID = 0;
+    static final int DATE_DIALOG_ID = 1;
 
     private TextView activeDateDisplay;
     private Calendar activeDate;
@@ -83,10 +83,11 @@ public class ProjectForm extends AppCompatActivity {
                 showDateDialog(endDateDisplay, endDate);
             }
         });
-        newdb.insertProject(DATE_DIALOG_ID, projectname.toString(), projectDescription.toString(), startDate.toString(), endDate.toString(), 1);
+        newdb.insertProject(projectname.toString(), projectDescription.toString(), startDate.toString(), endDate.toString(), 1);
         /* display the current date (this method is below)  */
         updateDisplay(startDateDisplay, startDate);
         updateDisplay(endDateDisplay, endDate);
+
     }
 
     /**

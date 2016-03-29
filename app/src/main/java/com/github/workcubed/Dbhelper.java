@@ -20,9 +20,9 @@ public class Dbhelper extends SQLiteOpenHelper {
 
 
     public static final String DATABASE_NAME = "WorkCubed.db";
-    public static final String CONTACTS_TABLE_NAME = "Project";
+    public static final String CONTACTS_TABLE_NAME = "Projects";
     public static final String CONTACTS_COLUMN_ID = "id";
-    public static final String CONTACTS_COLUMN_PROJECTNAME = "name";
+    public static final String CONTACTS_COLUMN_PROJECTNAME = "names";
     public static final String CONTACTS_COLUMN_DESCRIPTION = "description";
     public static final String CONTACTS_COLUMN_DATECREATED = "datecreated";
     public static final String CONTACTS_COLUMN_DATEDEADLINE = "datedeadline";
@@ -35,13 +35,10 @@ public class Dbhelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
-
-
-
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table Projects " + "id integer primary key," +
-                "description text, datecreated string, datedeadline string, completed int");
+        db.execSQL("create table Projects " + "(id integer primary key, " +
+                "names text, description text, datecreated text, datedeadline text, completed integer)");
     }
 
     @Override
@@ -50,25 +47,55 @@ public class Dbhelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertProject (Integer id, String name, String description,
-                                  String datecreated, String datecompleted, int completed){
+    public boolean insertProject (String name, String description,
+                                  String datecreated, String datecompleted, Integer completed){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
+        contentValues.put("names", name);
         contentValues.put("description", description);
         contentValues.put("datecreated", datecreated);
         contentValues.put("datedeadline", datecompleted);
         contentValues.put("completed", completed);
 
-        db.update("contacts", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        db.insert("Projects", null, contentValues);
         return true;
     }
 
-    public Integer deleteProject (Integer id) {
+    public boolean updateProject (Integer id, String name, String description,
+                                  String datecreated, String datecompleted, Integer completed){
 
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("Project",  "id = ? ",
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("names", name);
+        contentValues.put("description", description);
+        contentValues.put("datecreated", datecreated);
+        contentValues.put("datedeadline", datecompleted);
+        contentValues.put("completed", completed);
+
+        db.update("Projects", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
+        return true;
+    }
+
+    public Cursor getData(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Projects where id="+id+"", null );
+        return res;
+    }
+
+
+    public int numberOfRows(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, CONTACTS_TABLE_NAME);
+        return numRows;
+    }
+
+
+
+    public Integer deleteProjects (Integer id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("Projects",  "id = ? ",
                 new String[] { Integer.toString(id) });
 
     }
@@ -80,7 +107,7 @@ public class Dbhelper extends SQLiteOpenHelper {
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * Project", null );
+        Cursor res =  db.rawQuery( "select * Projects", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
