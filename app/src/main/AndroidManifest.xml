@@ -23,7 +23,8 @@
         <activity android:name=".ProjectForm" />
         <activity android:name=".ProjectView" />
         <activity android:name=".Report" />
-        <activity android:name=".TaskForm"></activity>
+        <activity android:name=".TaskForm" />
+        <activity android:name=".TaskView"></activity>
     </application>
 
 </manifest>

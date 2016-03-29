@@ -15,6 +15,17 @@ public class Task {
     String url = "http://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
     String username = "crew";
     String password = "pizza123";
+    String _name;
+    String _description;
+    int _hours_estimated;
+    int _hours_actual;
+
+    public Task (String name, String description, int hours_estimated, int hours_actual) {
+        _name = name;
+        _description = description;
+        _hours_estimated = hours_estimated;
+        _hours_actual = hours_actual;
+    }
 
     /**
      *

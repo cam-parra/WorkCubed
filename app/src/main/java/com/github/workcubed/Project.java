@@ -44,6 +44,10 @@ public class Project {
         _name = name;
     }
 
+    public String getName () {
+        return _name;
+    }
+
     /**
      *
      * @param name            Holds the name that will be add to the project

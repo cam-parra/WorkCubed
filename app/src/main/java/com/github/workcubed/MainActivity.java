@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -39,16 +40,24 @@ public class MainActivity extends AppCompatActivity {
 
 //        try {
 
-            ListView lv = (ListView) findViewById(R.id.listView);
+            final ListView lv = (ListView) findViewById(R.id.listView);
 
-            List<Project> your_array_list = new ArrayList<Project>(getAllProjects());
+            List<String> your_array_list = new ArrayList<String>(getAllProjects());
 
-            ArrayAdapter<Project> arrayAdapter = new ArrayAdapter<Project>(
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                     this,
                     android.R.layout.simple_list_item_1,
                     your_array_list);
 
             lv.setAdapter(arrayAdapter);
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    System.out.println(parent);
+                    projectDisplay(view);
+                }
+            });
 //        }
 
 //        catch (SQLException se) {
@@ -120,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
      * @throws InstantiationException  Problem with instantiation
      * @throws IllegalAccessException  Illegal attempt to access
      */
-    public static ArrayList<Project> getAllProjects() {
+    public static ArrayList<String> getAllProjects() {
 
 //        Log.i("MainActivity", "Yo Yo Yo");
 //        String myDriver = "com.mysql.jdbc.Driver";
@@ -137,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 //            ResultSet rst;
 //            rst = stm.executeQuery(sql);
 
-        ArrayList<Project> projectList = new ArrayList<>();
+        ArrayList<String> projectList = new ArrayList<>();
 //            while (rst.next()) {
 
         int id =     0;
@@ -156,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 //                Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
 //                        rst.getDate("DateDeadLine"), rst.getInt("Completed"), rst.getString("Name"));
             Project project = new Project(id, "this is a project", creation_date, deadline, 0, name);
-            projectList.add(project);
+            projectList.add(project.getName());
             id++;
         }
         return projectList;
@@ -180,6 +189,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ProjectView.class);
         startActivity(intent);
 
+    }
+
+    public void reportOnClick (View view) {
+        Intent intent = new Intent(this, Report.class);
+        startActivity(intent);
     }
 
 }

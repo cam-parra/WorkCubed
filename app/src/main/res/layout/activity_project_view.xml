@@ -12,53 +12,43 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/project_name"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/project_description"
-        android:layout_below="@+id/project_name"
-        android:layout_alignEnd="@+id/project_name" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/project_start"
-        android:layout_below="@+id/project_description"
-        android:layout_alignParentStart="true"
-        android:text="Start Date" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/project_start_date"
-        android:layout_alignBottom="@+id/project_start"
-        android:layout_toEndOf="@+id/project_start" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/project_end"
-        android:layout_alignBottom="@+id/project_start_date"
-        android:layout_toEndOf="@+id/project_start_date"
-        android:text="End Date" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/project_end_date"
-        android:layout_alignBottom="@+id/project_end"
-        android:layout_toEndOf="@+id/project_end" />
+        android:layout_alignTop="@+id/project_deadline"
+        android:layout_toEndOf="@+id/project_deadline"
+        android:layout_alignBottom="@+id/project_deadline" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView2"
-        android:layout_below="@+id/project_start"
+        android:layout_below="@+id/project_end_date"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/project_name"
+        android:text="Name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/project_description"
+        android:text="Desc"
+        android:layout_below="@+id/project_name"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp" />
+        android:layout_marginTop="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Deadline"
+        android:id="@+id/project_deadline"
+        android:layout_below="@+id/project_description"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp" />
 
 </RelativeLayout>
