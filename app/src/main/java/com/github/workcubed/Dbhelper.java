@@ -37,8 +37,7 @@ public class Dbhelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table Projects " + "(id integer primary key, " +
-                "names text, description text, datecreated text, datedeadline text, completed integer)");
+        db.execSQL("CREATE TABLE Projects " + "(id INTEGER PRIMARY KEY, names TEXT, description TEXT, datecreated TEXT, datedeadline TEXT, completed INTEGER);");
     }
 
     @Override
@@ -59,6 +58,7 @@ public class Dbhelper extends SQLiteOpenHelper {
         contentValues.put("completed", completed);
 
         db.insert("Projects", null, contentValues);
+
         return true;
     }
 
@@ -67,13 +67,17 @@ public class Dbhelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("names", name);
-        contentValues.put("description", description);
-        contentValues.put("datecreated", datecreated);
-        contentValues.put("datedeadline", datecompleted);
         contentValues.put("completed", completed);
+        contentValues.put("datedeadline", datecompleted);
+        contentValues.put("datecreated", datecreated);
+        contentValues.put("description", description);
+        contentValues.put("names", name);
 
-        db.update("Projects", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
+
+
+
+
+        db.update("Projects", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }
 

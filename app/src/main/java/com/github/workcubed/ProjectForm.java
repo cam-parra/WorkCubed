@@ -6,10 +6,12 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.app.FragmentManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,10 +29,12 @@ public class ProjectForm extends AppCompatActivity {
     private TextView endDateDisplay;
     private Button startPickDate;
     private Button endPickDate;
+    private Button submit;
     private Calendar startDate;
     private Calendar endDate;
     private EditText projectname;
     private EditText projectDescription;
+    private Integer complete;
 
     static final int DATE_DIALOG_ID = 1;
 
@@ -83,7 +87,44 @@ public class ProjectForm extends AppCompatActivity {
                 showDateDialog(endDateDisplay, endDate);
             }
         });
-        newdb.insertProject(projectname.toString(), projectDescription.toString(), startDate.toString(), endDate.toString(), 1);
+
+        final CheckBox completedtask  = (CheckBox) findViewById(R.id.checkBox);
+
+        completedtask.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                complete = 1;
+                Logger.getLogger("HEY THIS WORKED");
+            }
+        });
+
+        submit = (Button) findViewById(R.id.submit_project);
+
+        final String startdate = new StringBuilder().append(startDate.get(Calendar.MONTH) + 1)
+                .append("-")
+                .append(startDate.get(Calendar.DAY_OF_MONTH))
+                .append("-")
+                .append(startDate.get(Calendar.YEAR)).append(" ").toString();
+
+        final String endingdate = new StringBuilder().append(endDate.get(Calendar.MONTH) + 1)
+                .append("-")
+                .append(endDate.get(Calendar.DAY_OF_MONTH))
+                .append("-")
+                .append(endDate.get(Calendar.YEAR)).append(" ").toString();
+
+        final String project_name = projectname.getText().toString();
+        final String description_text = projectDescription.getText().toString();
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                newdb.insertProject(project_name, description_text, startdate, endingdate, complete);
+                Logger.getLogger("HEY THIS WORKED");
+            }
+        });
+
+
+
+
+
         /* display the current date (this method is below)  */
         updateDisplay(startDateDisplay, startDate);
         updateDisplay(endDateDisplay, endDate);
@@ -169,6 +210,9 @@ public class ProjectForm extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
+
 
 }
 
