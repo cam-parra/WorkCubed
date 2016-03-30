@@ -21,7 +21,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editNameTask"
         android:layout_below="@+id/taskNameText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -39,7 +39,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/editDescriptionText"
         android:layout_below="@+id/taskDescriptionText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/editHourscomlete"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/hoursEstimatedText" />
@@ -69,7 +69,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Hours Spent"
         android:id="@+id/hoursSpentText"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/editHourscomlete"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -77,10 +77,10 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/editEstimated"
         android:layout_below="@+id/hoursEstimatedText"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/editText3" />
+        android:layout_alignStart="@+id/editHourscomlete" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:text="Deadline"
         android:id="@+id/deadline_button"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/editEstimated"
         android:layout_alignParentStart="true"
         android:layout_marginTop="67dp" />
 

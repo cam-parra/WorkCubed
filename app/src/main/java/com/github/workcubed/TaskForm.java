@@ -57,10 +57,11 @@ public class TaskForm extends AppCompatActivity {
         /* display the current date (this method is below)  */
         //        updateDisplay(startDateDisplay, startDate);
         updateDisplay(endDateDisplay, endDate);
-        name_of_task = (EditText) findViewById(R.id.taskNameText);
-        description = (EditText) findViewById(R.id.taskDescriptionText);
-        estimated_hours = (EditText) findViewById(R.id.hoursEstimatedText);
-        actual_hours = (EditText) findViewById(R.id.hoursSpentText);
+
+        name_of_task = (EditText) findViewById(R.id.editNameTask);
+        description = (EditText) findViewById(R.id.editDescriptionText);
+        estimated_hours = (EditText) findViewById(R.id.editEstimated);
+        actual_hours = (EditText) findViewById(R.id.editHourscomlete);
 
         final String usertask = name_of_task.getText().toString();
         final String userDescription = description.getText().toString();
