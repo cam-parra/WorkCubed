@@ -4,23 +4,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.app.DatePickerDialog;
 import java.util.Calendar;
+import java.util.logging.Logger;
+
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.widget.DatePicker;
 import android.app.Dialog;
 
+import org.w3c.dom.Text;
 
 
 public class TaskForm extends AppCompatActivity {
 
-//    private TextView startDateDisplay;
+    private EditText name_of_task;
+    private EditText description;
+    private EditText estimated_hours;
+    private EditText actual_hours;
     private TextView endDateDisplay;
-//    private Button startPickDate;
     private Button endPickDate;
-//    private Calendar startDate;
     private Calendar endDate;
+    private TaskDbHelper dbHelper;
+    private Button submit;
 
     static final int DATE_DIALOG_ID = 0;
 
@@ -31,6 +38,7 @@ public class TaskForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_form);
+
 
         /* capture our View elements for the end date function */
         endDateDisplay = (TextView) findViewById(R.id.deadline_text);
@@ -47,8 +55,34 @@ public class TaskForm extends AppCompatActivity {
         });
 
         /* display the current date (this method is below)  */
-//        updateDisplay(startDateDisplay, startDate);
+        //        updateDisplay(startDateDisplay, startDate);
         updateDisplay(endDateDisplay, endDate);
+        name_of_task = (EditText) findViewById(R.id.taskNameText);
+        description = (EditText) findViewById(R.id.taskDescriptionText);
+        estimated_hours = (EditText) findViewById(R.id.hoursEstimatedText);
+        actual_hours = (EditText) findViewById(R.id.hoursSpentText);
+
+        final String usertask = name_of_task.getText().toString();
+        final String userDescription = description.getText().toString();
+        final String userEstimated = estimated_hours.getText().toString();
+        final String userActual = actual_hours.getText().toString();
+
+        final String endingdate = new StringBuilder().append(endDate.get(Calendar.MONTH) + 1)
+                .append("-")
+                .append(endDate.get(Calendar.DAY_OF_MONTH))
+                .append("-")
+                .append(endDate.get(Calendar.YEAR)).append(" ").toString();
+
+        submit = (Button) findViewById(R.id.submit_task);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dbHelper.insertTask(usertask, userDescription, userActual, userEstimated, 1, endingdate, 1);
+            }
+        });
+
+
+
     }
 
     /**
@@ -69,7 +103,7 @@ public class TaskForm extends AppCompatActivity {
             activeDate.set(Calendar.MONTH, monthOfYear);
             activeDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateDisplay(activeDateDisplay, activeDate);
-            unregisterDateDisplay();
+            //unregisterDateDisplay();
         }
     };
 
