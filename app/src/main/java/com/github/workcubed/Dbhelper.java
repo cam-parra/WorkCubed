@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.InputMismatchException;
+import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -58,7 +59,8 @@ public class Dbhelper extends SQLiteOpenHelper {
         contentValues.put("datedeadline", datecompleted);
         contentValues.put("completed", completed);
 
-        db.insert("Projects", null, contentValues);
+        long result = db.insert("Projects", null, contentValues);
+        System.out.println(result);
 
         return true;
     }
@@ -82,6 +84,13 @@ public class Dbhelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from Projects where id="+id+"", null );
         return res;
+    }
+
+    public ArrayList<String> getAllProjectsData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> projectList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from Projects", null);
+        return projectList;
     }
 
 
@@ -108,13 +117,17 @@ public class Dbhelper extends SQLiteOpenHelper {
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * Projects", null );
+        Cursor res =  db.rawQuery( "select * from Projects", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
+            System.out.println("Made it here!");
+            String row_name = "1" + res.getString(res.getColumnIndex(CONTACTS_COLUMN_PROJECTNAME));
             array_list.add(res.getString(res.getColumnIndex(CONTACTS_COLUMN_PROJECTNAME)));
+            System.out.println(row_name);
             res.moveToNext();
         }
+
         return array_list;
     }
 
