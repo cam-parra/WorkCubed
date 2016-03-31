@@ -91,10 +91,10 @@
         android:layout_height="wrap_content"
         android:text="@string/submit_button"
         android:id="@+id/submit_project"
-        android:onClick="addProject"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView2"
-        android:layout_marginBottom="56dp" />
+        android:layout_marginBottom="56dp"
+        android:nestedScrollingEnabled="true" />
 
     <TextView
         android:layout_width="wrap_content"

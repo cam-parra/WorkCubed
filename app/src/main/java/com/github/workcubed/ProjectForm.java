@@ -1,5 +1,6 @@
 package com.github.workcubed;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -36,6 +37,7 @@ public class ProjectForm extends AppCompatActivity {
     private EditText projectDescription;
     private Integer complete;
 
+
     static final int DATE_DIALOG_ID = 1;
 
     private TextView activeDateDisplay;
@@ -49,7 +51,7 @@ public class ProjectForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_form);
-
+        final Activity temp = this;
         newdb = new Dbhelper(this);
 
         projectname = (EditText) findViewById(R.id.editText);
@@ -88,36 +90,50 @@ public class ProjectForm extends AppCompatActivity {
             }
         });
 
-        final CheckBox completedtask  = (CheckBox) findViewById(R.id.checkBox);
+//        final CheckBox completedtask  = (CheckBox) findViewById(R.id.checkBox);
 
 //        completedtask.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
-//                complete = 1;
+                 complete = 0;
 //                Logger.getLogger("HEY THIS WORKED");
 //            }
 //        });
 
         submit = (Button) findViewById(R.id.submit_project);
 
-        final String startdate = new StringBuilder().append(startDate.get(Calendar.MONTH) + 1)
-                .append("-")
-                .append(startDate.get(Calendar.DAY_OF_MONTH))
-                .append("-")
-                .append(startDate.get(Calendar.YEAR)).append(" ").toString();
 
-        final String endingdate = new StringBuilder().append(endDate.get(Calendar.MONTH) + 1)
-                .append("-")
-                .append(endDate.get(Calendar.DAY_OF_MONTH))
-                .append("-")
-                .append(endDate.get(Calendar.YEAR)).append(" ").toString();
 
-        final String project_name = projectname.getText().toString();
+
+
+
+
         final String description_text = projectDescription.getText().toString();
 
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                final String startdate = new StringBuilder().append(startDate.get(Calendar.MONTH) + 1)
+                        .append("-")
+                        .append(startDate.get(Calendar.DAY_OF_MONTH))
+                        .append("-")
+                        .append(startDate.get(Calendar.YEAR)).append(" ").toString();
+
+                final String endingdate = new StringBuilder().append(endDate.get(Calendar.MONTH) + 1)
+                        .append("-")
+                        .append(endDate.get(Calendar.DAY_OF_MONTH))
+                        .append("-")
+                        .append(endDate.get(Calendar.YEAR)).append(" ").toString();
+
+                final String project_name = projectname.getText().toString();
+
+                final String description_text = projectDescription.getText().toString();
+                
+                Intent intent = new Intent(temp, MainActivity.class);
+                startActivity(intent);
                 newdb.insertProject(project_name, description_text, startdate, endingdate, complete);
+                System.out.println("HEY THIS WORKED");
                 Logger.getLogger("HEY THIS WORKED");
+
             }
         });
 
@@ -212,7 +228,12 @@ public class ProjectForm extends AppCompatActivity {
     }
 
 
+    public void backToMain (View view) {
+        System.out.println("Back to Main");
 
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
 }
 

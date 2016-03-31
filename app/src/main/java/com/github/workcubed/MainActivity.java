@@ -29,6 +29,8 @@ import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
+    Dbhelper db;
+
     /**
      *
      * @param savedInstanceState Saved date form previous instances
@@ -38,54 +40,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        try {
+        db = new Dbhelper(this);
+        final ListView lv = (ListView) findViewById(R.id.listView);
 
-            final ListView lv = (ListView) findViewById(R.id.listView);
+        List<String> your_array_list = new ArrayList<String>(db.getAllProjects());
 
-            List<String> your_array_list = new ArrayList<String>(getAllProjects());
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, your_array_list);
+        lv.setAdapter(arrayAdapter);
+//        finish();
+//        startActivity(getIntent());
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                    this,
-                    android.R.layout.simple_list_item_1,
-                    your_array_list);
+//            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                public void onItemClick(AdapterView<?> parent, View view,
+//                                        int position, long id) {
+//                    System.out.println(parent);
+//                    projectDisplay(view);
+//                }
+//            });
 
-            lv.setAdapter(arrayAdapter);
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    System.out.println(parent);
-                    projectDisplay(view);
-                }
-            });
-//        }
-
-//        catch (SQLException se) {
-//            System.out.println("Can't connect! " + se);
-////            Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, se);
-//
-//        }
-//
-//        catch (ClassNotFoundException cnfe) {
-//            System.out.println(cnfe);
-//        }
-//        catch (IllegalAccessException e) {
-//            System.out.println(e);
-//        }
-//        catch (InstantiationException e) {
-//            System.out.println(e);
-//        }
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     /**
@@ -121,62 +93,63 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     *
-     * @return                         returns projectList -> the completed list of info for project
-     * @throws ClassNotFoundException  Class missing or corrupt
-     * @throws SQLException            SQL connection failed
-     * @throws InstantiationException  Problem with instantiation
-     * @throws IllegalAccessException  Illegal attempt to access
-     */
-    public static ArrayList<String> getAllProjects() {
-
-//        Log.i("MainActivity", "Yo Yo Yo");
-//        String myDriver = "com.mysql.jdbc.Driver";
-//        String url = "jdbc:mysql://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
-//        String username = "crew";
-//        String password = "pizza123";
-//        Class.forName(myDriver).newInstance();
-
-
-
-//            Statement stm;
-//            stm = connection.createStatement();
-//            String sql = "Select * From Customer";
-//            ResultSet rst;
-//            rst = stm.executeQuery(sql);
-
-        ArrayList<String> projectList = new ArrayList<>();
-//            while (rst.next()) {
-
-        int id =     0;
-        Date date = new Date();
-        long creation = date.getTime();
-        Timestamp creation_date = new Timestamp(creation);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2017);
-        calendar.set(Calendar.MONTH, 5);
-        calendar.set(Calendar.DAY_OF_MONTH, 17);
-        creation = date.getTime();
-        Timestamp deadline = new Timestamp(creation);
-//            Date deadline =;
-        while (id < 6) {
-            String name = "Project" + id;
-//                Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
-//                        rst.getDate("DateDeadLine"), rst.getInt("Completed"), rst.getString("Name"));
-            Project project = new Project(id, "this is a project", creation_date, deadline, 0, name);
-            projectList.add(project.getName());
-            id++;
-        }
-        return projectList;
-
-    }
+//    /**
+//     *
+//     * @return                         returns projectList -> the completed list of info for project
+//     * @throws ClassNotFoundException  Class missing or corrupt
+//     * @throws SQLException            SQL connection failed
+//     * @throws InstantiationException  Problem with instantiation
+//     * @throws IllegalAccessException  Illegal attempt to access
+//     */
+//    public static ArrayList<String> getAllProjects() {
+//
+////        Log.i("MainActivity", "Yo Yo Yo");
+////        String myDriver = "com.mysql.jdbc.Driver";
+////        String url = "jdbc:mysql://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
+////        String username = "crew";
+////        String password = "pizza123";
+////        Class.forName(myDriver).newInstance();
+//
+//
+//
+////            Statement stm;
+////            stm = connection.createStatement();
+////            String sql = "Select * From Customer";
+////            ResultSet rst;
+////            rst = stm.executeQuery(sql);
+//
+//        ArrayList<String> projectList = new ArrayList<>();
+////            while (rst.next()) {
+//
+//        int id =     0;
+//        Date date = new Date();
+//        long creation = date.getTime();
+//        Timestamp creation_date = new Timestamp(creation);
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, 2017);
+//        calendar.set(Calendar.MONTH, 5);
+//        calendar.set(Calendar.DAY_OF_MONTH, 17);
+//        creation = date.getTime();
+//        Timestamp deadline = new Timestamp(creation);
+////            Date deadline =;
+//        while (id < 6) {
+//            String name = "Project" + id;
+////                Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
+////                        rst.getDate("DateDeadLine"), rst.getInt("Completed"), rst.getString("Name"));
+//            Project project = new Project(id, "this is a project", creation_date, deadline, 0, name);
+//            projectList.add(project.getName());
+//            id++;
+//        }
+//        return projectList;
+//
+//    }
 
     /**
      *
      * @param view The button ID
      */
     public void addProject(View view) {
+        finish();
         Intent intent = new Intent(this, ProjectForm.class);
         startActivity(intent);
     }
