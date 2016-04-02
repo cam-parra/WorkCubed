@@ -86,13 +86,42 @@ public class Dbhelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public ArrayList<String> getAllProjectsData() {
+    public String getProjectDescByName (String name) {
         SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<String> projectList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from Projects", null);
-        return projectList;
+        String desc = "";
+        Cursor cursor = db.rawQuery("select description from Projects where names=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            desc = cursor.getString(cursor.getColumnIndex("description"));
+        }
+
+        return desc;
     }
 
+    public String getProjectDeadlineByName (String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String deadline = "";
+        Cursor cursor = db.rawQuery("select datedeadline from Projects where names=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            deadline = cursor.getString(cursor.getColumnIndex("datedeadline"));
+        }
+        return deadline;
+    }
+
+    public String getProjectIDByName (String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String id = "";
+        Cursor cursor = db.rawQuery("select id from Projects where names=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            id = cursor.getString(cursor.getColumnIndex("id"));
+        }
+        return id;
+    }
 
     public int numberOfRows(){
         SQLiteDatabase db = this.getReadableDatabase();

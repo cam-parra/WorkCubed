@@ -9,19 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.github.workcubed.ProjectView">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/project_end_date"
-        android:layout_alignTop="@+id/project_deadline"
-        android:layout_toEndOf="@+id/project_deadline"
-        android:layout_alignBottom="@+id/project_deadline" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView2"
-        android:layout_below="@+id/project_end_date"
+        android:layout_below="@+id/project_deadline"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -45,10 +37,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Deadline"
+        android:text="Deadline: "
         android:id="@+id/project_deadline"
         android:layout_below="@+id/project_description"
         android:layout_alignParentStart="true"
         android:layout_marginTop="26dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/deadline"
+        android:layout_above="@+id/listView2"
+        android:layout_toEndOf="@+id/project_deadline" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add To-Do"
+        android:id="@+id/todo_button"
+        android:layout_alignTop="@+id/project_name"
+        android:layout_alignEnd="@+id/listView2"
+        android:nestedScrollingEnabled="false"
+        android:onClick="goToTaskForm" />
 
 </RelativeLayout>
