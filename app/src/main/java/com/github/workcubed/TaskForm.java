@@ -28,11 +28,12 @@ public class TaskForm extends AppCompatActivity {
     private TextView endDateDisplay;
     private Button endPickDate;
     private Calendar endDate;
-    private TaskDbHelper dbHelper;
+    private Dbhelper dbHelper;
     private Button submit;
     private String project_name;
 
     static final int DATE_DIALOG_ID = 0;
+    public final static String EXTRA_MESSAGE = "project name";
 
     private TextView activeDateDisplay;
     private Calendar activeDate;
@@ -42,7 +43,7 @@ public class TaskForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_form);
 
-        dbHelper = new TaskDbHelper(this);
+        dbHelper = new Dbhelper(this);
         final Activity temp = this;
 
         Intent intent = getIntent();
@@ -70,23 +71,26 @@ public class TaskForm extends AppCompatActivity {
         estimated_hours = (EditText) findViewById(R.id.est_hours);
         actual_hours = (EditText) findViewById(R.id.hours_spent);
 
-        final String usertask = name_of_task.getText().toString();
-        final String userDescription = description.getText().toString();
-        final String userEstimated = estimated_hours.getText().toString();
-        final String userActual = actual_hours.getText().toString();
 
-        final String endingdate = new StringBuilder().append(endDate.get(Calendar.MONTH) + 1)
-                .append("-")
-                .append(endDate.get(Calendar.DAY_OF_MONTH))
-                .append("-")
-                .append(endDate.get(Calendar.YEAR)).append(" ").toString();
 
         submit = (Button) findViewById(R.id.submit_task);
 
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                final String usertask = name_of_task.getText().toString();
+                final String userDescription = description.getText().toString();
+                final String userEstimated = estimated_hours.getText().toString();
+                final String userActual = actual_hours.getText().toString();
+
+                final String endingdate = new StringBuilder().append(endDate.get(Calendar.MONTH) + 1)
+                        .append("-")
+                        .append(endDate.get(Calendar.DAY_OF_MONTH))
+                        .append("-")
+                        .append(endDate.get(Calendar.YEAR)).append(" ").toString();
+
                 dbHelper.insertTask(usertask, userDescription, userActual, userEstimated, project_name, endingdate, 0);
                 Intent intent = new Intent(temp, ProjectView.class);
+                intent.putExtra(EXTRA_MESSAGE, project_name);
                 startActivity(intent);
             }
         });
