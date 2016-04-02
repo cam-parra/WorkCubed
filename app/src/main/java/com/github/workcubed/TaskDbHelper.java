@@ -22,9 +22,11 @@ public class TaskDbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "WorkCubed.db";
     public static final String TASK_TABLE_NAME = "Tasks";
     public static final String TASK_COLUMN_ID = "id";
-    public static final String TASK_COLUMN_PROJECTNAME = "names";
+    public static final String TASK_COLUMN_TASKNAME = "name";
+    public static final String TASK_COLUMN_PROJECTNAME = "projectname";
     public static final String TASK_COLUMN_DESCRIPTION = "description";
-    public static final String TASK_COLUMN_DATECREATED = "datecreated";
+    public static final String TASK_COLUMN_HOURSEXPECTED = "hours_expected";
+    public static final String TASK_COLUMN_HOURSACTUAL = "hours_actual";
     public static final String TASK_COLUMN_DATEDEADLINE = "datedeadline";
     public static final String TASK_COLUMN_COMPLETED = "completed";
 
@@ -38,9 +40,9 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE Tasks " + "(id INTEGER PRIMARY KEY, names TEXT, " +
-                "description TEXT, hours_expected REAL, hours_actual REAL, project_id INTEGER," +
-                " datedeadline TEXT, completed INTEGER);");
+        db.execSQL("CREATE TABLE Tasks " + "(id INTEGER PRIMARY KEY, name TEXT, " +
+                "description TEXT, hours_expected REAL, hours_actual REAL, projectname TEXT," +
+                " datedeadline TEXT, completed INTEGER,);");
     }
 
     @Override
@@ -49,13 +51,17 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertTask (String name, String description,
-                               String hours_actual, String hours_expected,
-                               Integer project_id, String datedeadline, Integer completed){
+    public boolean insertTask (String name,
+                               String description,
+                               String hours_actual,
+                               String hours_expected,
+                               Integer project_id,
+                               String datedeadline, 
+                               Integer completed){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("names", name);
+        contentValues.put("name", name);
         contentValues.put("description", description);
         contentValues.put("hours_expected", hours_expected);
         contentValues.put("hours_actual", hours_actual);
@@ -75,7 +81,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("names", name);
+        contentValues.put("name", name);
         contentValues.put("description", description);
         contentValues.put("hours_expected", hours_expected);
         contentValues.put("hours_actual", hours_actual);

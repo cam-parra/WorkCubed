@@ -3,25 +3,16 @@ package com.github.workcubed;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.support.v4.app.FragmentManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.app.DatePickerDialog.OnDateSetListener;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
@@ -54,7 +45,7 @@ public class ProjectForm extends AppCompatActivity {
         final Activity temp = this;
         newdb = new Dbhelper(this);
 
-        projectname = (EditText) findViewById(R.id.editText);
+        projectname = (EditText) findViewById(R.id.task_name);
         projectname.getText();
 
         projectDescription = (EditText) findViewById(R.id.proj_des_edit);
@@ -127,7 +118,7 @@ public class ProjectForm extends AppCompatActivity {
                 final String project_name = projectname.getText().toString();
 
                 final String description_text = projectDescription.getText().toString();
-                
+
                 Intent intent = new Intent(temp, MainActivity.class);
                 startActivity(intent);
                 newdb.insertProject(project_name, description_text, startdate, endingdate, complete);
@@ -229,8 +220,6 @@ public class ProjectForm extends AppCompatActivity {
 
 
     public void backToMain (View view) {
-        System.out.println("Back to Main");
-
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

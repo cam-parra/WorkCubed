@@ -14,12 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,7 +24,8 @@ import java.util.logging.Logger;
 public class MainActivity extends AppCompatActivity {
 
     Dbhelper db;
-
+    String project_name;
+    public final static String EXTRA_MESSAGE = "project name";
     /**
      *
      * @param savedInstanceState Saved date form previous instances
@@ -47,16 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, your_array_list);
         lv.setAdapter(arrayAdapter);
-//        finish();
-//        startActivity(getIntent());
 
-//            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                public void onItemClick(AdapterView<?> parent, View view,
-//                                        int position, long id) {
-//                    System.out.println(parent);
-//                    projectDisplay(view);
-//                }
-//            });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                project_name = (String) parent.getItemAtPosition(position);
+
+                System.out.println(project_name);
+
+                projectDisplay(view);
+            }
+        });
 
     }
 
@@ -93,63 +89,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    /**
-//     *
-//     * @return                         returns projectList -> the completed list of info for project
-//     * @throws ClassNotFoundException  Class missing or corrupt
-//     * @throws SQLException            SQL connection failed
-//     * @throws InstantiationException  Problem with instantiation
-//     * @throws IllegalAccessException  Illegal attempt to access
-//     */
-//    public static ArrayList<String> getAllProjects() {
-//
-////        Log.i("MainActivity", "Yo Yo Yo");
-////        String myDriver = "com.mysql.jdbc.Driver";
-////        String url = "jdbc:mysql://workedcubed.cj4vqnmu1rwe.us-west-2.rds.amazonaws.com";
-////        String username = "crew";
-////        String password = "pizza123";
-////        Class.forName(myDriver).newInstance();
-//
-//
-//
-////            Statement stm;
-////            stm = connection.createStatement();
-////            String sql = "Select * From Customer";
-////            ResultSet rst;
-////            rst = stm.executeQuery(sql);
-//
-//        ArrayList<String> projectList = new ArrayList<>();
-////            while (rst.next()) {
-//
-//        int id =     0;
-//        Date date = new Date();
-//        long creation = date.getTime();
-//        Timestamp creation_date = new Timestamp(creation);
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.YEAR, 2017);
-//        calendar.set(Calendar.MONTH, 5);
-//        calendar.set(Calendar.DAY_OF_MONTH, 17);
-//        creation = date.getTime();
-//        Timestamp deadline = new Timestamp(creation);
-////            Date deadline =;
-//        while (id < 6) {
-//            String name = "Project" + id;
-////                Project project = new Project(rst.getInt("ID"), rst.getString("Description"), rst.getTimestamp("DateCreated"),
-////                        rst.getDate("DateDeadLine"), rst.getInt("Completed"), rst.getString("Name"));
-//            Project project = new Project(id, "this is a project", creation_date, deadline, 0, name);
-//            projectList.add(project.getName());
-//            id++;
-//        }
-//        return projectList;
-//
-//    }
-
     /**
      *
      * @param view The button ID
      */
     public void addProject(View view) {
-        finish();
+
         Intent intent = new Intent(this, ProjectForm.class);
         startActivity(intent);
     }
@@ -160,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void projectDisplay(View view) {
         Intent intent = new Intent(this,ProjectView.class);
+        intent.putExtra(EXTRA_MESSAGE, project_name);
         startActivity(intent);
 
     }

@@ -21,7 +21,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/task_name"
         android:layout_below="@+id/taskNameText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -32,14 +32,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Description"
         android:id="@+id/taskDescriptionText"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/task_name"
         android:layout_alignParentStart="true"
         android:layout_marginTop="35dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/task_description"
         android:layout_below="@+id/taskDescriptionText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/est_hours"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/hoursEstimatedText" />
@@ -69,7 +69,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Hours Spent"
         android:id="@+id/hoursSpentText"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/est_hours"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -77,10 +77,10 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/hours_spent"
         android:layout_below="@+id/hoursEstimatedText"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/editText3" />
+        android:layout_alignStart="@+id/est_hours" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -88,9 +88,8 @@
         android:layout_height="wrap_content"
         android:text="Deadline"
         android:id="@+id/deadline_button"
-        android:layout_below="@+id/editText4"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="67dp" />
+        android:layout_below="@+id/hours_spent"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -106,6 +105,6 @@
         android:layout_height="wrap_content"
         android:text="submit"
         android:id="@+id/submit_task"
-        android:layout_below="@+id/deadline_button"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/task_description" />
 </RelativeLayout>
