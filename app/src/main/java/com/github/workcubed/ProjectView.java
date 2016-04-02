@@ -49,7 +49,7 @@ public class ProjectView extends AppCompatActivity {
 
         final ListView lv = (ListView) findViewById(R.id.listView2);
 
-        List<String> your_array_list = new ArrayList<String>(getAllTasks());
+        List<String> your_array_list = new ArrayList<String>(db.getAllTasks());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
@@ -69,12 +69,7 @@ public class ProjectView extends AppCompatActivity {
 
     public static ArrayList<String> getAllTasks () {
         ArrayList<String> taskList = new ArrayList<>();
-        int id = 0;
-        while (id < 8) {
-            String task = "task " + id;
-            taskList.add(task);
-            id++;
-        }
+
 
         return taskList;
     }

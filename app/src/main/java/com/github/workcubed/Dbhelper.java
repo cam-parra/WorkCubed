@@ -21,14 +21,23 @@ public class Dbhelper extends SQLiteOpenHelper {
 
 
     public static final String DATABASE_NAME = "WorkCubed.db";
-    public static final String CONTACTS_TABLE_NAME = "Projects";
-    public static final String CONTACTS_COLUMN_ID = "id";
-    public static final String CONTACTS_COLUMN_PROJECTNAME = "names";
-    public static final String CONTACTS_COLUMN_DESCRIPTION = "description";
-    public static final String CONTACTS_COLUMN_DATECREATED = "datecreated";
-    public static final String CONTACTS_COLUMN_DATEDEADLINE = "datedeadline";
-    public static final String CONTACTS_COLUMN_COMPLETED = "completed";
+    public static final String PROJECT_TABLE_NAME = "Projects";
+    public static final String PROJECT_COLUMN_ID = "id";
+    public static final String PROJECT_COLUMN_PROJECTNAME = "names";
+    public static final String PROJECT_COLUMN_DESCRIPTION = "description";
+    public static final String PROJECT_COLUMN_DATECREATED = "datecreated";
+    public static final String PROJECT_COLUMN_DATEDEADLINE = "datedeadline";
+    public static final String PROJECT_COLUMN_COMPLETED = "completed";
 
+    public static final String TASK_TABLE_NAME = "Tasks";
+    public static final String TASK_COLUMN_ID = "id";
+    public static final String TASK_COLUMN_TASKNAME = "name";
+    public static final String TASK_COLUMN_PROJECTNAME = "projectname";
+    public static final String TASK_COLUMN_DESCRIPTION = "description";
+    public static final String TASK_COLUMN_HOURSEXPECTED = "hours_expected";
+    public static final String TASK_COLUMN_HOURSACTUAL = "hours_actual";
+    public static final String TASK_COLUMN_DATEDEADLINE = "datedeadline";
+    public static final String TASK_COLUMN_COMPLETED = "completed";
 
     private HashMap hp;
 
@@ -39,7 +48,9 @@ public class Dbhelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE Projects " + "(id INTEGER PRIMARY KEY, names TEXT, description TEXT, datecreated TEXT, datedeadline TEXT, completed INTEGER);");
+        System.out.println("Creating tables");
+        db.execSQL("CREATE TABLE Projects (id INTEGER PRIMARY KEY, names TEXT, description TEXT, datecreated TEXT, datedeadline TEXT, completed INTEGER);");
+        db.execSQL("CREATE TABLE Tasks (id INTEGER PRIMARY KEY, name TEXT, description TEXT, hours_expected INTEGER, hours_actual INTEGER, projectname TEXT, datedeadline TEXT, completed INTEGER);");
     }
 
     @Override
@@ -65,6 +76,29 @@ public class Dbhelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean insertTask (String name,
+                               String description,
+                               String hours_actual,
+                               String hours_expected,
+                               String projectname,
+                               String datedeadline,
+                               Integer completed){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("description", description);
+        contentValues.put("hours_expected", hours_expected);
+        contentValues.put("hours_actual", hours_actual);
+        contentValues.put("projectname", projectname);
+        contentValues.put("datedeadline", datedeadline);
+        contentValues.put("completed", completed);
+
+        db.insert("Tasks", null, contentValues);
+
+        return true;
+    }
+
     public boolean updateProject (Integer id, String name, String description,
                                   String datecreated, String datecompleted, Integer completed){
 
@@ -77,6 +111,25 @@ public class Dbhelper extends SQLiteOpenHelper {
         contentValues.put("names", name);
 
         db.update("Projects", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        return true;
+    }
+
+    public boolean updateTask (Integer id, String name, String description,
+                               Float hours_actual, Float hours_expected,
+                               Integer projectname, String datedeadline, Integer completed){
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("description", description);
+        contentValues.put("hours_expected", hours_expected);
+        contentValues.put("hours_actual", hours_actual);
+        contentValues.put("projectname", projectname);
+        contentValues.put("datedeadline", datedeadline);
+        contentValues.put("completed", completed);
+
+        db.update("Tasks", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }
 
@@ -125,7 +178,7 @@ public class Dbhelper extends SQLiteOpenHelper {
 
     public int numberOfRows(){
         SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, CONTACTS_TABLE_NAME);
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, PROJECT_TABLE_NAME);
         return numRows;
     }
 
@@ -150,15 +203,43 @@ public class Dbhelper extends SQLiteOpenHelper {
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            System.out.println("Made it here!");
-            String row_name = "1" + res.getString(res.getColumnIndex(CONTACTS_COLUMN_PROJECTNAME));
-            array_list.add(res.getString(res.getColumnIndex(CONTACTS_COLUMN_PROJECTNAME)));
-            System.out.println(row_name);
+            array_list.add(res.getString(res.getColumnIndex(PROJECT_COLUMN_PROJECTNAME)));
             res.moveToNext();
         }
 
         return array_list;
     }
 
+    public int numberOfRowsInTask(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, TASK_TABLE_NAME);
+        return numRows;
+    }
 
+
+
+    public Integer deleteTasks (Integer id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("Tasks",  "id = ? ",
+                new String[] { Integer.toString(id) });
+
+    }
+
+
+    public ArrayList<String> getAllTasks()
+    {
+        ArrayList<String> array_list = new ArrayList<String>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Tasks", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(res.getColumnIndex(TASK_COLUMN_TASKNAME)));
+            res.moveToNext();
+        }
+        return array_list;
+    }
 }
