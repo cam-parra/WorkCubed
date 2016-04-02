@@ -19,7 +19,9 @@ public class ProjectView extends AppCompatActivity {
     String desc;
     String deadline;
     String id;
+    String task_name;
     public final static String EXTRA_MESSAGE = "project name";
+    public final static String TASK_MESSAGE = "task name";
 
     /**
      *
@@ -49,7 +51,7 @@ public class ProjectView extends AppCompatActivity {
 
         final ListView lv = (ListView) findViewById(R.id.listView2);
 
-        List<String> your_array_list = new ArrayList<String>(db.getAllTasks());
+        List<String> your_array_list = new ArrayList<String>(db.getAllTasks(project_name));
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
@@ -62,6 +64,11 @@ public class ProjectView extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 System.out.println("hello world");
+                task_name = (String) parent.getItemAtPosition(position);
+
+                System.out.println(project_name);
+
+                taskDisplay(view);
             }
         });
 
@@ -77,6 +84,12 @@ public class ProjectView extends AppCompatActivity {
     public void goToTaskForm (View view) {
         Intent intent = new Intent(this,TaskForm.class);
         intent.putExtra(EXTRA_MESSAGE, project_name);
+        startActivity(intent);
+    }
+
+    public void taskDisplay  (View view) {
+        Intent intent = new Intent(this,TaskView.class);
+        intent.putExtra(TASK_MESSAGE, task_name);
         startActivity(intent);
     }
 }

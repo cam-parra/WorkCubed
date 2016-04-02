@@ -227,13 +227,13 @@ public class Dbhelper extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<String> getAllTasks()
+    public ArrayList<String> getAllTasks(String name)
     {
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Tasks", null );
+        Cursor res =  db.rawQuery( "select * from Tasks where projectname=?", new String[]{name + ""});
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -241,5 +241,55 @@ public class Dbhelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
         return array_list;
+    }
+
+    public String getTaskDescByName (String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String desc = "";
+        Cursor cursor = db.rawQuery("select description from Tasks where names=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            desc = cursor.getString(cursor.getColumnIndex("description"));
+        }
+
+        return desc;
+    }
+
+    public Integer getTaskStatusByName (String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Integer status = 0;
+        Cursor cursor = db.rawQuery("select completed from Tasks where names=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            status = cursor.getInt(cursor.getColumnIndex("completed"));
+        }
+
+        return status;
+    }
+
+    public Integer getTaskHoursEstimatedByName (String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Integer hours = 0;
+        Cursor cursor = db.rawQuery("select hours_expected from Tasks where names=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            hours = cursor.getInt(cursor.getColumnIndex("hours_expected"));
+        }
+        return hours;
+    }
+
+    public Integer getTaskHoursActualByName (String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Integer hours = 0;
+        Cursor cursor = db.rawQuery("select hours_expected from Tasks where names=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            hours = cursor.getInt(cursor.getColumnIndex("hours_expected"));
+        }
+        return hours;
     }
 }
