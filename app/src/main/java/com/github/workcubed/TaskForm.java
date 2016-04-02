@@ -1,5 +1,7 @@
 package com.github.workcubed;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +30,7 @@ public class TaskForm extends AppCompatActivity {
     private Calendar endDate;
     private TaskDbHelper dbHelper;
     private Button submit;
+    private String project_name;
 
     static final int DATE_DIALOG_ID = 0;
 
@@ -39,6 +42,11 @@ public class TaskForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_form);
 
+        dbHelper = new TaskDbHelper(this);
+        final Activity temp = this;
+
+        Intent intent = getIntent();
+        project_name = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         /* capture our View elements for the end date function */
         endDateDisplay = (TextView) findViewById(R.id.deadline_text);
@@ -77,7 +85,9 @@ public class TaskForm extends AppCompatActivity {
 
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                dbHelper.insertTask(usertask, userDescription, userActual, userEstimated, 1, endingdate, 1);
+                dbHelper.insertTask(usertask, userDescription, userActual, userEstimated, project_name, endingdate, 0);
+                Intent intent = new Intent(temp, ProjectView.class);
+                startActivity(intent);
             }
         });
 

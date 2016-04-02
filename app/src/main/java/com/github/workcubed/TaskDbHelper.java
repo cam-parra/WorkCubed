@@ -48,6 +48,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Tasks");
+        System.out.println("Made to the upgrade");
         onCreate(db);
     }
 
@@ -55,8 +56,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                                String description,
                                String hours_actual,
                                String hours_expected,
-                               Integer project_id,
-                               String datedeadline, 
+                               String projectname,
+                               String datedeadline,
                                Integer completed){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -65,7 +66,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         contentValues.put("description", description);
         contentValues.put("hours_expected", hours_expected);
         contentValues.put("hours_actual", hours_actual);
-        contentValues.put("project_id", project_id);
+        contentValues.put("projectname", projectname);
         contentValues.put("datedeadline", datedeadline);
         contentValues.put("completed", completed);
 
@@ -76,7 +77,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
     public boolean updateTask (Integer id, String name, String description,
                                Float hours_actual, Float hours_expected,
-                               Integer project_id, String datedeadline, Integer completed){
+                               Integer projectname, String datedeadline, Integer completed){
 
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -85,7 +86,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         contentValues.put("description", description);
         contentValues.put("hours_expected", hours_expected);
         contentValues.put("hours_actual", hours_actual);
-        contentValues.put("project_id", project_id);
+        contentValues.put("projectname", projectname);
         contentValues.put("datedeadline", datedeadline);
         contentValues.put("completed", completed);
 

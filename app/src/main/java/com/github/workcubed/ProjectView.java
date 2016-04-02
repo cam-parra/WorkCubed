@@ -19,6 +19,8 @@ public class ProjectView extends AppCompatActivity {
     String desc;
     String deadline;
     String id;
+    public final static String EXTRA_MESSAGE = "project name";
+
     /**
      *
      * @param savedInstanceState Saved info from previous states
@@ -75,5 +77,11 @@ public class ProjectView extends AppCompatActivity {
         }
 
         return taskList;
+    }
+
+    public void goToTaskForm (View view) {
+        Intent intent = new Intent(this,TaskForm.class);
+        intent.putExtra(EXTRA_MESSAGE, project_name);
+        startActivity(intent);
     }
 }
