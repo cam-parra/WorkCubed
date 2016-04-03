@@ -49,8 +49,8 @@ public class Dbhelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         System.out.println("Creating tables");
-        db.execSQL("CREATE TABLE Projects (id INTEGER PRIMARY KEY, names TEXT, description TEXT, datecreated TEXT, datedeadline TEXT, completed INTEGER);");
-        db.execSQL("CREATE TABLE Tasks (id INTEGER PRIMARY KEY, name TEXT, description TEXT, hours_expected INTEGER, hours_actual INTEGER, projectname TEXT, datedeadline TEXT, completed INTEGER);");
+        db.execSQL("CREATE TABLE Projects (id INTEGER PRIMARY KEY, names TEXT, description TEXT, datecreated TEXT, datedeadline TEXT, completed INTEGER, unique (names));");
+        db.execSQL("CREATE TABLE Tasks (id INTEGER PRIMARY KEY, name TEXT, description TEXT, hours_expected INTEGER, hours_actual INTEGER, projectname TEXT, datedeadline TEXT, completed INTEGER, unique(name));");
     }
 
     @Override
@@ -115,8 +115,7 @@ public class Dbhelper extends SQLiteOpenHelper {
     }
 
     public boolean updateTask (Integer id, String name, String description,
-                               Float hours_actual, Float hours_expected,
-                               Integer projectname, String datedeadline, Integer completed){
+                               Float hours_actual, Float hours_expected, Integer completed, String projectname){
 
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -126,7 +125,7 @@ public class Dbhelper extends SQLiteOpenHelper {
         contentValues.put("hours_expected", hours_expected);
         contentValues.put("hours_actual", hours_actual);
         contentValues.put("projectname", projectname);
-        contentValues.put("datedeadline", datedeadline);
+//        contentValues.put("datedeadline", datedeadline);
         contentValues.put("completed", completed);
 
         db.update("Tasks", contentValues, "id = ? ", new String[]{Integer.toString(id)});
@@ -246,7 +245,7 @@ public class Dbhelper extends SQLiteOpenHelper {
     public String getTaskDescByName (String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         String desc = "";
-        Cursor cursor = db.rawQuery("select description from Tasks where names=?", new String[]{name + ""});
+        Cursor cursor = db.rawQuery("select description from Tasks where name=?", new String[]{name + ""});
         if(cursor.getCount() > 0) {
 
             cursor.moveToFirst();
@@ -259,7 +258,7 @@ public class Dbhelper extends SQLiteOpenHelper {
     public Integer getTaskStatusByName (String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Integer status = 0;
-        Cursor cursor = db.rawQuery("select completed from Tasks where names=?", new String[]{name + ""});
+        Cursor cursor = db.rawQuery("select completed from Tasks where name=?", new String[]{name + ""});
         if(cursor.getCount() > 0) {
 
             cursor.moveToFirst();
@@ -272,7 +271,7 @@ public class Dbhelper extends SQLiteOpenHelper {
     public Integer getTaskHoursEstimatedByName (String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Integer hours = 0;
-        Cursor cursor = db.rawQuery("select hours_expected from Tasks where names=?", new String[]{name + ""});
+        Cursor cursor = db.rawQuery("select hours_expected from Tasks where name=?", new String[]{name + ""});
         if(cursor.getCount() > 0) {
 
             cursor.moveToFirst();
@@ -284,12 +283,39 @@ public class Dbhelper extends SQLiteOpenHelper {
     public Integer getTaskHoursActualByName (String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Integer hours = 0;
-        Cursor cursor = db.rawQuery("select hours_expected from Tasks where names=?", new String[]{name + ""});
+        Cursor cursor = db.rawQuery("select hours_actual from Tasks where name=?", new String[]{name + ""});
         if(cursor.getCount() > 0) {
 
             cursor.moveToFirst();
-            hours = cursor.getInt(cursor.getColumnIndex("hours_expected"));
+            hours = cursor.getInt(cursor.getColumnIndex("hours_actual"));
         }
         return hours;
+    }
+
+    public String getTaskColumnProjectname (String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String project = "";
+        Cursor cursor = db.rawQuery("select projectname from Tasks where name=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            project = cursor.getString(cursor.getColumnIndex("projectname"));
+        }
+
+        return project;
+    }
+
+    public Integer getTaskIDByName (String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Integer id = null;
+
+        Cursor cursor = db.rawQuery("select id from Tasks where name=?", new String[]{name + ""});
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            id = cursor.getInt(cursor.getColumnIndex("id"));
+        }
+
+        return id;
     }
 }

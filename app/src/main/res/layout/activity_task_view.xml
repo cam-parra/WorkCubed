@@ -49,26 +49,24 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Hours spent on To-Do: "
         android:id="@+id/hours_actual"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/est_hours"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editText"
+        android:ems="2"
+        android:id="@+id/est_hours"
         android:layout_alignTop="@+id/hours_estimated"
         android:layout_toEndOf="@+id/hours_estimated" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:ems="2"
+        android:id="@+id/act_hours"
+        android:layout_below="@+id/est_hours"
+        android:layout_alignStart="@+id/est_hours" />
 
     <CheckBox
         android:layout_width="wrap_content"
