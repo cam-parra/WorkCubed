@@ -43,7 +43,7 @@ public class Dbhelper extends SQLiteOpenHelper {
 
     public Dbhelper(Context context){
         //super(context, DATABASE_NAME, null, 1);
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
     }
 
     @Override
