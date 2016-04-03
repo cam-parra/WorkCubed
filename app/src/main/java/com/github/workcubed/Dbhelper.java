@@ -318,4 +318,19 @@ public class Dbhelper extends SQLiteOpenHelper {
 
         return id;
     }
+
+    public ArrayList<String> getAllCompletedTasks () {
+        ArrayList<String> task_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Tasks where completed=?", new String[] { Integer.toString(1) });
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            task_list.add(res.getString(res.getColumnIndex(TASK_COLUMN_TASKNAME)));
+            res.moveToNext();
+        }
+
+        return task_list;
+    }
 }
