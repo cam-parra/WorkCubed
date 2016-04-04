@@ -92,4 +92,9 @@ public class ProjectView extends AppCompatActivity {
         intent.putExtra(TASK_MESSAGE, task_name);
         startActivity(intent);
     }
+
+    public void homeButton (View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

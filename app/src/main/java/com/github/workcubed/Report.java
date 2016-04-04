@@ -1,5 +1,6 @@
 package com.github.workcubed;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class Report extends AppCompatActivity implements CalendarInterface {
     ArrayList<String> values = new ArrayList<String>();
     private Typeface mTf;
     private Dbhelper dbhelper;
+    float average;
 
     List<String> tasks;
 
@@ -113,7 +115,7 @@ public class Report extends AppCompatActivity implements CalendarInterface {
                 estimated = dbhelper.getTaskHoursEstimatedByName(tasks.get(i));
 
                 float result = (actual * 100) / estimated;
-
+                average += result;
                 if (result > 100)
                     yValsBad.add(new BarEntry(result, i));
                 else
@@ -121,6 +123,13 @@ public class Report extends AppCompatActivity implements CalendarInterface {
 
             }
         }
+        average = average / tasks.size();
+        TextView average_textView = (TextView) findViewById(R.id.average);
+        String float_average = (String.format("%.2f", average) + " %");
+
+//        String average_string = (Float.toString(average) + " %");
+        average_textView.setText(float_average);
+
         BarDataSet bad_productivity = new BarDataSet(yValsBad, "bad");
         bad_productivity.setColors(new int[]{R.color.colorPrimary});
         BarDataSet good_productivity = new BarDataSet(yValsGood, "good");
@@ -280,4 +289,8 @@ public class Report extends AppCompatActivity implements CalendarInterface {
         chart.invalidate();
     }
 
+    public void homeButton (View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

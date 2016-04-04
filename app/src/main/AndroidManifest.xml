@@ -20,12 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ProjectForm" />
-        <activity android:name=".ProjectView" />
-        <activity android:name=".Report" />
-        <activity android:name=".TaskForm" />
-        <activity android:name=".TaskView"></activity>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ProjectForm" android:screenOrientation="portrait"/>
+        <activity android:name=".ProjectView" android:screenOrientation="portrait"/>
+        <activity android:name=".Report" android:screenOrientation="portrait"/>
+        <activity android:name=".TaskForm" android:screenOrientation="portrait"/>
+        <activity android:name=".TaskView" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
